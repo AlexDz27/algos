@@ -1,10 +1,5 @@
-// Sort unique values in array
+// Removes duplicate values in array
 const arrWithDuplicates = ['Eat', 'Eat', 'Do', 'Eat', 'Create', 'Do'];
-/**
- *
- * @param arr
- * @returns {Array}
- */
 function sortArrayUnique(arr) {
   let cleanArr = [];
 
@@ -20,8 +15,53 @@ function sortArrayUnique(arr) {
 
   return cleanArr;
 }
-
-console.log(sortArrayUnique(arrWithDuplicates));
+sortArrayUnique(arrWithDuplicates);
 
 //////////////
+
+// Binary search - Finds position of element by its value
+const testArr = [1, 2, 3, 4, 5, 6, 7, 8];
+function binarySearch(arr, searchedElem) {
+  let foundElemPos;
+
+  let lowestIndex = 0;
+  let highestIndex = arr.length - 1;
+  let middleIndex;
+
+  let middleElem;
+
+  for (let i = 0; i < 10; i++) {
+    middleIndex = Math.floor((lowestIndex + highestIndex) / 2);
+    middleElem = arr[middleIndex];
+
+    if (searchedElem === middleElem) {
+      foundElemPos = middleIndex;
+      break;
+    }
+
+    if (searchedElem < middleElem) {
+      highestIndex = middleIndex - 1;
+    }
+
+    if (searchedElem > middleElem) {
+      lowestIndex = middleIndex + 1;
+    }
+  }
+
+  return foundElemPos;
+}
+console.log('RESULT: ' + binarySearch(testArr, 3));
+
+//////////////
+
+
+
+
+
+
+
+
+
+
+
 
