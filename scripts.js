@@ -30,7 +30,7 @@ function binarySearch(arr, searchedElem) {
 
   let middleElem;
 
-  for (let i = 0; i < 10; i++) {
+  for (; lowestIndex <= highestIndex;) {
     middleIndex = Math.floor((lowestIndex + highestIndex) / 2);
     middleElem = arr[middleIndex];
 
@@ -50,10 +50,33 @@ function binarySearch(arr, searchedElem) {
 
   return foundElemPos;
 }
-console.log('RESULT: ' + binarySearch(testArr, 3));
+binarySearch(testArr, 11);
 
 //////////////
 
+// Selection sort - Sorts the array -> array becomes sorted in ascending order
+const testArr21 = [5, 3, 0, 7, 4, 8, 12, 20, 6, 11, 18];
+function selectionSort(arr) {
+  let sortedArr = [];
+  let initialArrLength = arr.length;
+  
+  for (let i = 0; i < initialArrLength; i++) {
+    let smallestIndex = 0;
+    let smallestEl = arr[smallestIndex];
+
+    for (let j = 1; j < arr.length; j++) {
+      if (smallestEl > arr[j]) {
+        smallestIndex = j;
+        smallestEl = arr[smallestIndex];
+      }
+    }
+
+    sortedArr.push(arr.splice(smallestIndex, 1).pop());
+  }
+  
+  return sortedArr;
+}
+selectionSort(testArr21);
 
 
 
