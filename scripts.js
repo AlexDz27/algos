@@ -78,8 +78,161 @@ function selectionSort(arr) {
 }
 selectionSort(testArr21);
 
+///////////////////////////
+
+/*const arr21 = [[100, 600], [200, 300], [250, 275], [700, 10000]];
+function sortV(arr) {
+  // Filtering asc
+  let sortedArr = [];
+  const arrInitialLength = arr.length;
+
+  for (let i = 0; i < arrInitialLength; i++) {
+    let smallestIndex = 0;
+    let smallestInterval = arr[smallestIndex];
+
+    for (let j = 1; j < arr.length; j++) {
+      if (smallestInterval[0] > arr[j][0]) {
+        smallestIndex = j;
+        smallestInterval = arr[smallestIndex];
+      }
+    }
+
+    sortedArr.push(arr.splice(smallestIndex, 1).pop());
+  }
+
+  // Logic
+  let newIntervals = [];
+  const sortedArrInitialLength = sortedArr.length;
+
+  for (let i = 0; i < sortedArr.length; i++) {
+    let goodIndex = 0;
+    // let goodInterval = sortedArr[goodIndex];
+    let goodInterval = sortedArr[i];
+    let goodAmount = goodInterval[1] - goodInterval[0];
+    // console.log(goodAmount);
+
+    for (let j = 1; j < sortedArrInitialLength; j++) {
+      let next = sortedArr[j];
+      if (next === undefined) {
+        break;
+      }
+
+      let nextAmount = next[1] - next[0];
+
+      console.log(goodInterval + ' ' + j);
+      console.log(next + ' ' + j);
+      if (goodInterval[0] < next[0] && goodInterval[1] > next[1]) {
+        // goodIndex = j;
+        // goodInterval = sortedArr[goodIndex];
+
+        sortedArr.splice(j, 1);
+      }
+
+      /!*if (goodInterval[0] < next[0] && goodInterval[1] > next[1]) {
+        console.log('got');
+        // goodIndex = j;
+        // goodInterval = sortedArr[goodIndex];
+        sortedArr.splice(j, 1);
+      }*!/
+    }
+
+    if (newIntervals.includes(goodInterval)) {
+      continue;
+    }
+
+    // newIntervals.push(sortedArr.splice(goodIndex, 1).pop());
+    newIntervals.push(goodInterval);
+  }
+
+  return newIntervals;
+}
+
+console.log(sortV(arr21));*/
 
 
+
+//////////////
+
+// const arr21 = [[100, 600], [200, 300], [250, 275]];
+const arr21 = [[100, 600], [200, 300], [250, 275], [700, 1000], [800, 900]];
+function sortV(arr) {
+  // Filtering asc
+  let sortedArr = [];
+  const arrInitialLength = arr.length;
+
+  for (let i = 0; i < arrInitialLength; i++) {
+    let smallestIndex = 0;
+    let smallestInterval = arr[smallestIndex];
+
+    for (let j = 1; j < arr.length; j++) {
+      if (smallestInterval[0] > arr[j][0]) {
+        smallestIndex = j;
+        smallestInterval = arr[smallestIndex];
+      }
+    }
+
+    sortedArr.push(arr.splice(smallestIndex, 1).pop());
+  }
+
+  // Logic
+  let newIntervals = [];
+  const sortedArrInitialLength = sortedArr.length;
+
+  for (let i = 0; i < sortedArr.length; i++) {
+    let good = sortedArr[i];
+
+    for (let j = 1; j < sortedArr.length; j++) {
+      let next = sortedArr[j];
+
+      if (i === j) {
+        continue;
+      }
+
+      if (i === sortedArr.length - 1 && i > j) {
+        continue;
+      }
+
+      if (good[0] < next[0] && good[1] > next[1]) {
+        sortedArr.splice(j, 1);
+        j -= 1;
+
+        // if (i === 0) {
+        //   newIntervals.push(good);
+        // }
+
+        continue;
+      }
+
+
+      console.log(good);
+      console.log(next);
+
+    }
+
+    newIntervals.push(good);
+  }
+
+  return newIntervals;
+}
+
+console.log(sortV(arr21));
+
+
+// const myArrNew = [5, 66, 1, 66, 0, 10];
+// function removeSixSix(arr) {
+//   let sortedArr = [];
+//
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] === 66) {
+//       continue;
+//     }
+//
+//     sortedArr.push(arr[i]);
+//   }
+//
+//   return sortedArr;
+// }
+// console.log(removeSixSix(myArrNew));
 
 
 
