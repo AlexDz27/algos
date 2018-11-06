@@ -15,7 +15,7 @@ function sortArrayUnique(arr) {
 
   return cleanArr;
 }
-sortArrayUnique(arrWithDuplicates);
+console.log(sortArrayUnique(arrWithDuplicates)); // -> ["Eat", empty, "Do", empty, "Create"]
 
 //////////////
 
@@ -50,7 +50,7 @@ function binarySearch(arr, searchedElem) {
 
   return foundElemPos;
 }
-binarySearch(testArr, 11);
+console.log(binarySearch(testArr, 3)); // -> 2
 
 //////////////
 
@@ -76,13 +76,17 @@ function selectionSort(arr) {
   
   return sortedArr;
 }
-selectionSort(testArr21);
+console.log(selectionSort(testArr21)); // -> [0, 3, 4, 5, 6, 7, 8, 11, 12, 18, 20]
 
-///////////////////////////
+/////////////////////////
 
-/*const arr21 = [[100, 600], [200, 300], [250, 275], [700, 10000]];
-function sortV(arr) {
-  // Filtering asc
+// Complex array filter. What it does:
+// 0) Places values in ascending order: [[25, 50], [0, 20]] -> [[0, 20], [25, 50]]
+// 1) Duplicate values: [[0, 100], [0, 100]] -> [[0, 100]]
+// 2) Intersecting values: [[0, 100], [50, 75]] -> [[0, 100]]
+const arr21 = [[100, 600], [200, 300], [250, 275], [600, 700], [700, 900], [900, 1000], [1500, 2000], [1600, 1700]];
+function sortComplex(arr) {
+  // Placing values in ascending order
   let sortedArr = [];
   const arrInitialLength = arr.length;
 
@@ -102,81 +106,6 @@ function sortV(arr) {
 
   // Logic
   let newIntervals = [];
-  const sortedArrInitialLength = sortedArr.length;
-
-  for (let i = 0; i < sortedArr.length; i++) {
-    let goodIndex = 0;
-    // let goodInterval = sortedArr[goodIndex];
-    let goodInterval = sortedArr[i];
-    let goodAmount = goodInterval[1] - goodInterval[0];
-    // console.log(goodAmount);
-
-    for (let j = 1; j < sortedArrInitialLength; j++) {
-      let next = sortedArr[j];
-      if (next === undefined) {
-        break;
-      }
-
-      let nextAmount = next[1] - next[0];
-
-      console.log(goodInterval + ' ' + j);
-      console.log(next + ' ' + j);
-      if (goodInterval[0] < next[0] && goodInterval[1] > next[1]) {
-        // goodIndex = j;
-        // goodInterval = sortedArr[goodIndex];
-
-        sortedArr.splice(j, 1);
-      }
-
-      /!*if (goodInterval[0] < next[0] && goodInterval[1] > next[1]) {
-        console.log('got');
-        // goodIndex = j;
-        // goodInterval = sortedArr[goodIndex];
-        sortedArr.splice(j, 1);
-      }*!/
-    }
-
-    if (newIntervals.includes(goodInterval)) {
-      continue;
-    }
-
-    // newIntervals.push(sortedArr.splice(goodIndex, 1).pop());
-    newIntervals.push(goodInterval);
-  }
-
-  return newIntervals;
-}
-
-console.log(sortV(arr21));*/
-
-
-
-//////////////
-
-// const arr21 = [[100, 600], [200, 300], [250, 275]];
-const arr21 = [[100, 600], [200, 300], [250, 275], [700, 1000], [800, 900]];
-function sortV(arr) {
-  // Filtering asc
-  let sortedArr = [];
-  const arrInitialLength = arr.length;
-
-  for (let i = 0; i < arrInitialLength; i++) {
-    let smallestIndex = 0;
-    let smallestInterval = arr[smallestIndex];
-
-    for (let j = 1; j < arr.length; j++) {
-      if (smallestInterval[0] > arr[j][0]) {
-        smallestIndex = j;
-        smallestInterval = arr[smallestIndex];
-      }
-    }
-
-    sortedArr.push(arr.splice(smallestIndex, 1).pop());
-  }
-
-  // Logic
-  let newIntervals = [];
-  const sortedArrInitialLength = sortedArr.length;
 
   for (let i = 0; i < sortedArr.length; i++) {
     let good = sortedArr[i];
@@ -196,17 +125,17 @@ function sortV(arr) {
         sortedArr.splice(j, 1);
         j -= 1;
 
-        // if (i === 0) {
-        //   newIntervals.push(good);
-        // }
-
         continue;
       }
 
+      if (good[1] === next[0]) {
+        good[1] = next[1];
 
-      console.log(good);
-      console.log(next);
+        sortedArr.splice(j, 1);
+        j -= 1;
 
+        continue;
+      }
     }
 
     newIntervals.push(good);
@@ -214,30 +143,51 @@ function sortV(arr) {
 
   return newIntervals;
 }
+console.log(sortComplex(arr21)); // -> [[100, 1000], [1500, 2000]]
 
-console.log(sortV(arr21));
+////////////////
 
+// Reverse string
+function reverseString(str) {
+  let newStr = '';
+  const strMaxIndex = str.length - 1;
+  for (let i = strMaxIndex; i >= 0; i--) {
+    newStr += str[i];
+  }
 
-// const myArrNew = [5, 66, 1, 66, 0, 10];
-// function removeSixSix(arr) {
-//   let sortedArr = [];
-//
-//   for (let i = 0; i < arr.length; i++) {
-//     if (arr[i] === 66) {
-//       continue;
-//     }
-//
-//     sortedArr.push(arr[i]);
-//   }
-//
-//   return sortedArr;
-// }
-// console.log(removeSixSix(myArrNew));
+  return newStr;
+}
+console.log(reverseString('hello')); // -> olleh
 
+/////////////////////
 
+// Factorial
+function fact(number) {
+  let res = number;
 
+  if (number !== 1) {
+    res *= fact(number - 1);
+  }
 
+  return res;
+}
+console.log(fact(4)); // -> 24
 
+/////////////////////
 
+// Find the Longest Word in a String
+function findLongestWordLength(str) {
+  const strArray = str.split(' ');
+  const strArrayLength = strArray.length;
 
+  let longestItemLength = strArray[0].length;
+  for (let i = 1; i < strArrayLength; i++) {
+    if (strArray[i].length > longestItemLength) {
+      longestItemLength = strArray[i].length;
+    }
+  }
 
+  return longestItemLength;
+}
+
+console.log(findLongestWordLength("Long cat on me")); // -> 4
