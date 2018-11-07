@@ -189,5 +189,120 @@ function findLongestWordLength(str) {
 
   return longestItemLength;
 }
-
 console.log(findLongestWordLength("Long cat on me")); // -> 4
+
+/////////////////////
+
+// Return sum of numbers till the number specified in func param (via for loop and via recursion)
+function sumToViaLoop(number) {
+  let res = 0;
+
+  for (let i = number; i > 0; i--) {
+    res += i;
+  }
+
+  return res;
+}
+console.log(sumToViaLoop(4));
+function sumToViaRecursion(number) {
+  let res = number;
+
+  if (number > 1) {
+    res += sumToViaRecursion(number - 1);
+  }
+
+  return res;
+}
+console.log(sumToViaRecursion(4));
+
+/////////////////////
+
+// Sum numbers in array (via for loop, via recursion)
+function getSumOfNumbersArrayViaLoop(numbersArray) {
+  let result = 0;
+  const numbersArrayLength = numbersArray.length;
+
+  for (let i = 0; i < numbersArrayLength; i++) {
+    result += numbersArray[i];
+  }
+
+  return result;
+}
+console.log(getSumOfNumbersArrayViaLoop([2, 3, 10]));
+function getSumOfNumbersArrayViaRecursion(numbersArray) {
+  const numbersArrayLength = numbersArray.length;
+  let result = numbersArray[numbersArray.length - 1];
+  numbersArray.pop();
+
+  if (numbersArrayLength > 1) {
+    result += getSumOfNumbersArrayViaRecursion(numbersArray);
+  }
+
+  return result;
+}
+console.log(getSumOfNumbersArrayViaRecursion([2, 3, 10]));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
